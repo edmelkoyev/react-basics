@@ -11,8 +11,9 @@ function App(props) {
 
       <section className="todo-list">
 
-        <Todo title="To Learn JasvaScript" isCompleted={true} />
-        <Todo title="To Learn React" isCompleted={false} />
+        {props.todos.map(todoItem => 
+          <Todo key={todoItem.id} title={todoItem.title} isCompleted={todoItem.isCompleted} />
+        )}
         
       </section>
     </main>
@@ -20,7 +21,12 @@ function App(props) {
 }
 
 App.propTypes = {
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  todos: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    isCompleted: PropTypes.bool.isRequired
+  })).isRequired
 };
 
 App.defaultProps = {
