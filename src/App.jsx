@@ -11,6 +11,12 @@ class App extends React.Component {
     this.state = {
       todos: this.props.initialData
     };
+
+    this.handleStatusChange = this.handleStatusChange.bind(this);
+  }
+
+  handleStatusChange(id) {
+    console.log("onStatusChange", id);
   }
 
   render() {
@@ -21,7 +27,13 @@ class App extends React.Component {
         <section className="todo-list">
   
           {this.state.todos.map(todoItem => 
-            <Todo key={todoItem.id} title={todoItem.title} isCompleted={todoItem.isCompleted} />
+            <Todo 
+              key={todoItem.id} 
+              id={todoItem.id}
+              title={todoItem.title} 
+              isCompleted={todoItem.isCompleted}
+              onStatusChange={this.handleStatusChange}
+            />
           )}
           
         </section>

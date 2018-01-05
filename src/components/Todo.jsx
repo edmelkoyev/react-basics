@@ -5,10 +5,16 @@ import Checkbox from './Checkbox';
 import Button from './Button';
 
 function Todo(props) {
+    function handleChange() {
+        props.onStatusChange(props.id);
+    }
+
     return (
         <div className={`todo${props.isCompleted ? ' completed' : ''}`}>
-          <Checkbox isChecked={props.isCompleted} />
+          <Checkbox isChecked={props.isCompleted} onChange={handleChange} />
+
           <span className="todo-title">{props.title}</span>
+
           <Button className="delete icon" icon="delete" />
         </div>
     );
@@ -16,7 +22,8 @@ function Todo(props) {
 
 Todo.PropTypes = {
     title: PropTypes.string.isRequired,
-    isCompleted: PropTypes.bool.isRequired
+    isCompleted: PropTypes.bool.isRequired,
+    onStatusChange: PropTypes.func.isRequired
 };
 
 export default Todo;
