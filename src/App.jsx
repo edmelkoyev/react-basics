@@ -4,25 +4,36 @@ import PropTypes from 'prop-types';
 import Header from './components/Header';
 import Todo from './components/Todo';
 
-function App(props) {
-  return (
-    <main>
-      <Header title={props.title} />
+class App extends React.Component {
+  constructor(props){
+    super(props);
 
-      <section className="todo-list">
+    this.state = {
+      todos: this.props.initialData
+    };
+  }
 
-        {props.todos.map(todoItem => 
-          <Todo key={todoItem.id} title={todoItem.title} isCompleted={todoItem.isCompleted} />
-        )}
-        
-      </section>
-    </main>
-  );
+  render() {
+    return (
+      <main>
+        <Header title={this.props.title} />
+  
+        <section className="todo-list">
+  
+          {this.state.todos.map(todoItem => 
+            <Todo key={todoItem.id} title={todoItem.title} isCompleted={todoItem.isCompleted} />
+          )}
+          
+        </section>
+      </main>
+    );
+  }
 }
+
 
 App.propTypes = {
   title: PropTypes.string.isRequired,
-  todos: PropTypes.arrayOf(PropTypes.shape({
+  initialData: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     isCompleted: PropTypes.bool.isRequired
