@@ -3,9 +3,7 @@ const todos = [
         id: 1,
         title: 'To Learn JavaScript',
         isCompleted: true
-    }
-    /*
-    ,
+    },
     {
         id: 2,
         title: 'To Learn React',
@@ -21,7 +19,6 @@ const todos = [
         title: 'To Write Application',
         isCompleted: false
     }
-    */
 ];
 
 export default todos;
