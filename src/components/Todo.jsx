@@ -11,7 +11,7 @@ function Todo(props) {
 
           <span className="todo-title">{props.title}</span>
 
-          <Button className="delete icon" icon="delete" />
+          <Button className="delete icon" icon="delete" onClick={() => props.onDelete(props.id)} />
         </div>
     );
 }
@@ -19,7 +19,8 @@ function Todo(props) {
 Todo.PropTypes = {
     title: PropTypes.string.isRequired,
     isCompleted: PropTypes.bool.isRequired,
-    onStatusChange: PropTypes.func.isRequired
+    onStatusChange: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired
 };
 
 export default Todo;
