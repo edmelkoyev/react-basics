@@ -4,22 +4,56 @@ import PropTypes from 'prop-types';
 import Checkbox from './Checkbox';
 import Button from './Button';
 
-function Todo(props) {
-    return (
-        <div className={`todo${props.isCompleted ? ' completed' : ''}`}>
-          <Checkbox isChecked={props.isCompleted} onChange={() => props.onStatusChange(props.id)} />
+class Todo extends React.Component {
+    constructor(props) {
+        super(props);
 
-          <span className="todo-title">{props.title}</span>
+        this.state = {
+            editing: false
+        };
 
-          <Button className="delete icon" icon="delete" onClick={() => props.onDelete(props.id)} />
-        </div>
-    );
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        let title = this.refs.title.value;
+        
+        this.props.onEdit(this.props.id, title);
+        this.setState({ editing: false });
+    }
+
+    renderDisplay() {
+        return (
+            <div className={`todo${this.props.isCompleted ? ' completed' : ''}`}>
+                <Checkbox isChecked={this.props.isCompleted} onChange={() => this.props.onStatusChange(this.props.id)} />
+                <span className="todo-title">{this.props.title}</span>
+                <Button className="edit icon" icon="edit" onClick={() => this.setState({ editing: true })} />
+                <Button className="delete icon" icon="delete" onClick={() => this.props.onDelete(this.props.id)}/>
+            </div>
+        );
+    }
+
+    renderForm() {
+        return (
+            <form className="todo-edit-form" onSubmit={this.handleSubmit}>
+                <input type="text" ref="title" defaultValue={this.props.title}/>
+                <Button className="save icon" icon="save" type="submit" onClick={this.handleSubmit} />
+            </form>
+        );
+    }
+
+    render() {
+        return this.state.editing ? this.renderForm() : this.renderDisplay();
+    }
 }
+
 
 Todo.PropTypes = {
     title: PropTypes.string.isRequired,
     isCompleted: PropTypes.bool.isRequired,
     onStatusChange: PropTypes.func.isRequired,
+    onEdit: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired
 };
 
