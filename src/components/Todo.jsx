@@ -5,13 +5,9 @@ import Checkbox from './Checkbox';
 import Button from './Button';
 
 function Todo(props) {
-    function handleChange() {
-        props.onStatusChange(props.id);
-    }
-
     return (
         <div className={`todo${props.isCompleted ? ' completed' : ''}`}>
-          <Checkbox isChecked={props.isCompleted} onChange={handleChange} />
+          <Checkbox isChecked={props.isCompleted} onChange={() => props.onStatusChange(props.id)} />
 
           <span className="todo-title">{props.title}</span>
 
