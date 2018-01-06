@@ -12,7 +12,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      todos: this.props.initialData
+      todos: []
     };
 
     this.handleStatusChange = this.handleStatusChange.bind(this);
@@ -21,10 +21,11 @@ class App extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
   }
 
-
-  nextId(){
-    this._nextId = this._nextId || 100;
-    return this._nextId++;
+  componentDidMount() {
+    fetch('http://localhost:3000/api/todos')
+      .then(resp => resp.json())
+      .then(todos => this.setState({ todos }))
+      .catch(err => console.error(err.message));
   }
 
   handleStatusChange(id) {
@@ -105,12 +106,7 @@ class App extends React.Component {
 
 
 App.propTypes = {
-  title: PropTypes.string.isRequired,
-  initialData: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    isCompleted: PropTypes.bool.isRequired
-  })).isRequired
+  title: PropTypes.string.isRequired
 };
 
 App.defaultProps = {
