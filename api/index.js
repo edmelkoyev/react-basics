@@ -24,7 +24,7 @@ app.post('/api/todos', (req, res) => {
     let todo = {
         id: nextId++,
         title: req.body.title,
-        completed: false
+        isCompleted: false
     };
 
     todos.push(todo);
@@ -47,7 +47,7 @@ app.patch('/api/todos/:id', (req, res) => {
 
     if (!todo) return res.sendStatus(404);
 
-    todo.completed = !todo.completed;
+    todo.isCompleted = !todo.isCompleted;
 
     res.json(todo);
 });
