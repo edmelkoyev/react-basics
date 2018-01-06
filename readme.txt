@@ -1,23 +1,17 @@
 url = https://github.com/codedojo
 
-1. Mount
----------------------
-1.1 constructor (getInitialState)
-1.2 componentWillMount
-1.3 render
-1.4 componentDidNount
+npm install --save react-transition-group@1.x
 
-2. Update
----------------------
-2.1 componentWillReceiveProps(nextProps)
-2.2 shouldComponentUpdate(nextProps, nextState) => bool
-2.3 componentWillUpdate(nextProps, nextState)
-2.4 render
-2.5 compnentDidUpdate(prevProps, prevState)
+Documentation:
+https://github.com/reactjs/react-transition-group/tree/v1-stable#high-level-api-csstransitiongroup
 
-3. Unmount
----------------------
-3.1 componentWillUnmount
+<CSSTransitionGroup 
+    component="section" 
+    transitionName="slide"
+    transitionAppear={true} --> self appearance
+    transitionAppearTimeout={300} 
+    transitionEnterTimeout={500} --> child insertion to the DOM
+    transitionLeaveTimeout={300} --> child deleteion out of the DOM
 
 
 

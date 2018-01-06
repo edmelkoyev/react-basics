@@ -15,46 +15,12 @@ class Todo extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    /* Lifecycle: componentWillReceiveProps
-    componentWillReceiveProps(nextProps) {
-        console.log('2.1 componentWillReceiveProps');
-        console.log('2.1 nextProps', nextProps);
-    }
-    */
-
-    /* Lifecycle: shouldComponentUpdate
-    shouldComponentUpdate(nextProps, nextState) {
-        console.log('2.2 shouldComponentUpdate');
-        console.log('2.2 nextProps', nextProps);
-        console.log('2.2 nextState', nextState);
-        return true;
-    }
-    */
-
-    /* Lifecycle: componentWillUpdate
-    componentWillUpdate(nextProps, nextState) {
-        console.log('2.3 componentWillUpdate');
-        console.log('2.3 nextProps', nextProps);
-        console.log('2.3 nextState', nextState);
-    }
-    */
-
-    // Lifecycle: componentDidUpdate
     componentDidUpdate(prevProps, prevState) {
-        //console.log('2.5 componentDidUpdate');
-        //console.log('2.5 prevProps', prevProps);
-        //console.log('2.5 prevState', prevState);
         if(this.state.editing) {
             this.refs.title.focus();
             this.refs.title.select();
         }
     }
-
-    /* Lifecycle: componentWillUnmount
-    componentWillUnmount() {
-        console.log('3.1 componentWillUnmount');
-    }
-    */
 
     handleSubmit(event) {
         event.preventDefault();
@@ -65,7 +31,6 @@ class Todo extends React.Component {
     }
 
     renderDisplay() {
-        console.log('2.4 Todo render');
         return (
             <div className={`todo${this.props.isCompleted ? ' completed' : ''}`}>
                 <Checkbox isChecked={this.props.isCompleted} onChange={() => this.props.onStatusChange(this.props.id)} />

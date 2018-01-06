@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { CSSTransitionGroup } from 'react-transition-group';
 
 import Header from './components/Header';
 import Todo from './components/Todo';
@@ -14,21 +15,10 @@ class App extends React.Component {
       todos: this.props.initialData
     };
 
-    console.log('1.1 constructor');
     this.handleStatusChange = this.handleStatusChange.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-  }
-
-  // Lifecycle: componentWillMount
-  componentWillMount() {
-    console.log('1.2 componentWillMount');
-  }
-
-  // Lifecycle: componentDidMount
-  componentDidMount() {
-    console.log('1.4 componentDidMount');
   }
 
 
@@ -80,13 +70,20 @@ class App extends React.Component {
   }
 
   render() {
-    console.log('1.3 render');
 
     return (
       <main>
         <Header title={this.props.title} todos={this.state.todos} />
   
-        <section className="todo-list">
+        <CSSTransitionGroup 
+          component="section"
+          className="todo-list"
+          transitionName="slide"
+          transitionAppear={true}
+          transitionAppearTimeout={300}
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={300}
+          >
           {this.state.todos.map(todoItem => 
             <Todo 
               key={todoItem.id} 
@@ -98,7 +95,7 @@ class App extends React.Component {
               onDelete={this.handleDelete}
             />
           )}
-        </section>
+        </CSSTransitionGroup>
 
         <Form onAdd={this.handleAdd} />
       </main>
